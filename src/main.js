@@ -8,6 +8,6 @@ function main() {
     const world = new World(container);
 
     // 3. Render the scene
-    world.render();
+    world.start();
 }
 main();
