@@ -1,12 +1,11 @@
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 function createControls(camera, canvas) {
+  const controls = new OrbitControls(camera, canvas);
 
-    const controls = new OrbitControls(camera,canvas);
-    
-    controls.enableDamping = true;
-    controls.target.y = 1;
-    controls.tick = () => controls.update();
-    return controls;
+  controls.enableDamping = true;
+  controls.target.y = 1;
+  controls.tick = () => controls.update();
+  return controls;
 }
 
 export { createControls };

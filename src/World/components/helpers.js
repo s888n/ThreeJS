@@ -1,13 +1,13 @@
-import {AxesHelper, GridHelper} from 'three';
-function createAxesHelper(){
-    const helper = new AxesHelper(6);
-    helper.position.set(-3.5,0,-3.5);
-    return helper;
+import { AxesHelper, GridHelper } from "three";
+function createAxesHelper() {
+  const helper = new AxesHelper(6);
+  helper.position.set(-3.5, 0, -3.5);
+  return helper;
 }
-function createGridHelper(){
-    const helper = new GridHelper(6);
+function createGridHelper() {
+  const helper = new GridHelper(6);
 
-    return helper;
+  return helper;
 }
 
-export {createAxesHelper, createGridHelper};
+export { createAxesHelper, createGridHelper };
