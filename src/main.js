@@ -1,13 +1,17 @@
 import { World } from "./World/World.js";
-// 1. Create an instance of the World app
-function main() {
-  // 1. Create an instance of the World app
+//  Create an instance of the World app
+async function main() {
+  //  Create an instance of the World app
   const container = document.querySelector("#scene-container");
 
-  //2. Create an instance of the World app
+  //Create an instance of the World app
   const world = new World(container);
-
-  // 3. Render the scene
+  // async stuff
+  await world.init();
+  //  Render the scene
   world.start();
 }
-main();
+
+main().catch((err) => {
+  console.error(err);
+});

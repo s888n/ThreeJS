@@ -2,7 +2,7 @@ import { createCamera } from "./components/camera.js";
 import { createScene } from "./components/scene.js";
 import { createLights } from "./components/lights.js";
 import { createAxesHelper, createGridHelper } from "./components/helpers.js";
-import { Train } from "./components/Train/Train.js";
+import {loadBirds} from "./components/birds/birds.js";
 
 import { createControls } from "./systems/controls.js";
 import { createRenderer } from "./systems/rendrer.js";
@@ -14,6 +14,7 @@ let camera;
 let renderer;
 let scene;
 let loop;
+let controls;
 
 class World {
   constructor(container) {
@@ -22,15 +23,22 @@ class World {
     scene = createScene();
     loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
-
-    const controls = createControls(camera, renderer.domElement);
+    controls = createControls(camera, renderer.domElement);
+    
     const { ambientLight, mainLight } = createLights();
-    const train = new Train();
-    loop.updatables.push(controls, train);
-    scene.add(ambientLight, mainLight, train);
+  
+    loop.updatables.push(controls);
+    scene.add(ambientLight, mainLight);
+
     const resizer = new Resizer(container, camera, renderer);
 
-    scene.add(createAxesHelper(), createGridHelper());
+    // scene.add(createAxesHelper(), createGridHelper());
+  }
+  async init() {
+    const { parrot, flamingo, stork } = await loadBirds();
+    controls.target.copy(parrot.position);
+    loop.updatables.push(parrot, flamingo, stork);
+    scene.add(parrot, flamingo, stork);
   }
   //draw a single frame
   render() {
